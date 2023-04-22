@@ -1,10 +1,11 @@
-import { ThemeToggleBtn } from "./components/CustomButtons/ThemeToggleBtn";
+import { SideBar } from "./components/SideBar/SideBar";
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <ThemeToggleBtn className="" />
+      <div className="fixed flex lg:flex-col w-full lg:w-[100px]">
+        <SideBar />
+      </div>
     </>
   );
 }

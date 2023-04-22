@@ -6,11 +6,11 @@ interface ThemeToggleBtnProps {
 }
 
 export const ThemeToggleBtn = ({ className }: ThemeToggleBtnProps) => {
-  const [theme, setTheme] = useState("night");
+  const [theme, setTheme] = useState("cupcake");
   const toggleTheme = () => {
     setTheme(theme === "night" ? "cupcake" : "night");
   };
-  // initially set the theme and "listen" for changes to apply them to the HTML tag
+
   useEffect(() => {
     document.querySelector("html")?.setAttribute("data-theme", theme);
   }, [theme]);
@@ -19,7 +19,7 @@ export const ThemeToggleBtn = ({ className }: ThemeToggleBtnProps) => {
     <>
       <button onClick={toggleTheme} className={className}>
         {theme === "cupcake" ? (
-          <BsFillMoonFill size={20} />
+          <BsFillMoonFill size={20} color="white" />
         ) : (
           <BsFillSunFill size={20} />
         )}
