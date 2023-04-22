@@ -3,6 +3,8 @@ import image from "../../assets/image-avatar.jpg";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { ThemeToggleBtn } from "../CustomButtons/ThemeToggleBtn";
 
+// TODO: add hover effect for the theme toggle button
+
 export const SideBar = () => {
   const [theme, setTheme] = useState("night");
 
