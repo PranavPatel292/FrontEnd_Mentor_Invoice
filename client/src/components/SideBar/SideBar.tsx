@@ -24,15 +24,13 @@ export const SideBar = () => {
         } `}
       >
         <div className="flex h-[100%] w-full lg:flex-col justify-between border-[#494E6E] border-r-[1px] lg:border-r-0 lg:border-b-[1px]">
-          <div className="lg:w-[100px] lg:h-20 md:w-[80px] md:h-[80px] w-[72px] h-[72px] bg-gradient-to-r from-[#7C5DFA] bg-[#9277FF] rounded-r-2xl flex justify-center items-center">
+          <div className="lg:w-[100px] lg:h-[103px] md:w-[80px] md:h-[80px] w-[72px] h-[72px] bg-gradient-to-r from-[#603cf2] bg-[#9277FF] rounded-r-2xl flex justify-center items-center">
             <Logo />
           </div>
 
-          <ThemeToggleBtn
-            className="flex justify-center items-center pr-5 lg:pr-0 lg:pb-5"
-            setTheme={changeTheme}
-            theme={theme}
-          />
+          <div className="flex justify-center items-center pr-5 lg:pr-0 lg:pb-5">
+            <ThemeToggleBtn setTheme={changeTheme} />
+          </div>
         </div>
         <div className="lg:py-5 px-5 flex justify-center items-center avatar">
           <div className="w-10 rounded-full">
