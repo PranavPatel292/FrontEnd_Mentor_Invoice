@@ -4,8 +4,8 @@ import { ReactComponent as Plus } from "../assets/icon-plus.svg";
 export const FilterAndNewActionPanel = () => {
   return (
     <>
-      <div className="w-full flex justify-between items-center p-5">
-        <div className="stat">
+      <div className="w-full flex justify-between items-center p-5 ">
+        <div className="stat p-0">
           <div className="stat-value">Invoices</div>
           <div className="stat-desc">No invoices</div>
         </div>
