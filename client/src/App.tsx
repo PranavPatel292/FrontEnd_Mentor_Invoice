@@ -1,3 +1,5 @@
+import { FilterAndNewActionPanel } from "./components/FilterAndNewActionPanel";
+import { InvoiceItem } from "./components/InvoiceItem";
 import { SideBar } from "./components/SideBar/SideBar";
 
 function App() {
@@ -7,9 +9,16 @@ function App() {
         <div className="fixed flex lg:flex-col w-full lg:w-[100px]">
           <SideBar />
         </div>
-        <div className="lg:ml-[100px] mt-[77px] w-full h-screen ">
-          <div className="max-w-[1280px] mx-auto ">
-            <h1>Hello</h1>
+        <div className="lg:ml-[100px] mt-[65px] lg:mt-[50px] w-full ">
+          <div className="max-w-[730px] mx-auto ">
+            <div className="flex flex-col space-y-5 px-5">
+              <FilterAndNewActionPanel />
+              {/* <NoInvoiceMessage /> */}
+              <InvoiceItem />
+              <InvoiceItem />
+              <InvoiceItem />
+              <InvoiceItem />
+            </div>
           </div>
         </div>
       </div>
