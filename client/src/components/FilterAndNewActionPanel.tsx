@@ -1,6 +1,7 @@
 import { ReactComponent as DownArrow } from "../assets/icon-arrow-down.svg";
 import { ReactComponent as Plus } from "../assets/icon-plus.svg";
 
+//TODO: fix the padding for stat class
 export const FilterAndNewActionPanel = () => {
   return (
     <>
