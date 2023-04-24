@@ -6,8 +6,9 @@ import { BillFrom } from "./BillFrom";
 import { BillTo } from "./BillTo";
 import { ListItems } from "./ListItems";
 
-// TODO: define validation for item_list
-// TODO: how to differentiate between draft and save buttons
+// TODO: define validation for item_list.
+// TODO: how to differentiate between draft and save buttons.
+// TODO: make sure to do dirty submit when doing update.
 const item_list_schema = yup.object({
   item_name: yup.string().optional(),
   quality: yup.string().optional(),
@@ -47,7 +48,7 @@ export const CreateAndEditInvoice = () => {
     bill_to_country: "",
     issueDate: "",
     paymentTerms: "",
-    item_list: [{ item_name: "", quantity: 0, price: 0 }],
+    item_list: [],
     projectDescription: "",
   };
 
@@ -70,8 +71,13 @@ export const CreateAndEditInvoice = () => {
     name: "item_list",
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (
+    data: FormData,
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     console.log(data);
+    const btnType = event.currentTarget.name;
+    console.log(btnType);
   };
 
   useEffect(() => {
@@ -96,28 +102,41 @@ export const CreateAndEditInvoice = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col space-y-5 rounded-md m-5 p-7 modal-box"
       >
-        <BillFrom register={register} errors={errors} />
+        <div className="overflow-y-scroll flex flex-col space-y-5">
+          <BillFrom register={register} errors={errors} />
 
-        <BillTo register={register} errors={errors} />
+          <BillTo register={register} errors={errors} />
 
-        <ListItems
-          remove={remove}
-          data={controlledFields}
-          register={register}
-          errors={errors}
-          append={append}
-        />
+          <ListItems
+            remove={remove}
+            data={controlledFields}
+            register={register}
+            errors={errors}
+            append={append}
+          />
+        </div>
 
-        <div className="w-full flex justify-end space-x-5 pt-7">
+        <div className="flex justify-between ">
+          <div className="modal-action m-0">
+            <label
+              htmlFor="my-modal-4"
+              className="btn btn-xs sm:btn-sm md:btn-md"
+              onClick={() => reset(defaultValues)}
+            >
+              Discard
+            </label>
+          </div>
           <input
+            name="draft"
             type="submit"
             value="Save as Draft"
-            className="btn btn-secondary opacity-70"
+            className="btn btn-xs sm:btn-sm md:btn-md  btn-secondary opacity-80"
           />
           <input
+            name="save"
             type="submit"
             value="Save & Send"
-            className="btn btn-success"
+            className="btn btn-xs sm:btn-sm md:btn-md  btn-success"
           />
         </div>
       </form>
