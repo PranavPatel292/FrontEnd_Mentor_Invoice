@@ -1,10 +1,15 @@
+import Modal from "react-modal";
+import { CustomModal } from "./CustomModal";
 import { FilterAndNewActionPanel } from "./components/FilterAndNewActionPanel";
 import { InvoiceItem } from "./components/InvoiceItem";
 import { SideBar } from "./components/SideBar/SideBar";
 
 function App() {
+  Modal.setAppElement("#root");
   return (
     <>
+      <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+      <CustomModal />
       <div className="flex lg:flex-row flex-col">
         <div className="fixed flex lg:flex-col w-full lg:w-[100px]">
           <SideBar />
