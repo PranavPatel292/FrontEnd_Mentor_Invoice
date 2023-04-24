@@ -22,9 +22,12 @@ export const FilterAndNewActionPanel = () => {
           </div>
 
           <div className="flex flex-row">
-            <button className="btn btn-outline btn-primary btn-square">
+            <label
+              className="btn btn-outline btn-primary btn-square"
+              htmlFor="my-modal-4"
+            >
               <Plus />
-            </button>
+            </label>
           </div>
         </div>
       </div>
