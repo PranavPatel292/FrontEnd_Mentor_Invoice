@@ -1,7 +1,7 @@
 export const VIDetails = () => {
   return (
     <>
-      <div className="flex flex-col space-y-5 shadow-xl px-5">
+      <div className="flex flex-col space-y-5 shadow-xl px-5 md:p-5">
         <div className="w-full flex flex-col space-y-5 md:space-y-0 md:flex-row md:justify-between">
           <div className="flex flex-col">
             <p>#ID</p>

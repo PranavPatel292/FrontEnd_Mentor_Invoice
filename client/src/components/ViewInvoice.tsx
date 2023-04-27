@@ -18,7 +18,7 @@ export const ViewInvoice = () => {
         </div>
       </div>
 
-      <div className="hidden md:block">
+      <div className="hidden md:flex flex-col space-y-10">
         <VIMediumAndLarge />
         <VIDetails />
       </div>
