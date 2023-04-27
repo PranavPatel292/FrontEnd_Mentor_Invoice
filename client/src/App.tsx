@@ -1,11 +1,9 @@
-import Modal from "react-modal";
 import { CustomModal } from "./CustomModal";
 import { FilterAndNewActionPanel } from "./components/FilterAndNewActionPanel";
 import { InvoiceItem } from "./components/InvoiceItem";
 import { SideBar } from "./components/SideBar/SideBar";
 
 function App() {
-  Modal.setAppElement("#root");
   return (
     <>
       <input type="checkbox" id="my-modal-4" className="modal-toggle" />
@@ -16,12 +14,8 @@ function App() {
         </div>
         <div className="lg:ml-[100px] mt-[65px] lg:mt-[50px] w-full ">
           <div className="max-w-[730px] mx-auto ">
-            <div className="flex flex-col space-y-5 px-5">
+            <div className=" flex  flex-col space-y-5">
               <FilterAndNewActionPanel />
-              {/* <NoInvoiceMessage /> */}
-              <InvoiceItem />
-              <InvoiceItem />
-              <InvoiceItem />
               <InvoiceItem />
             </div>
           </div>
