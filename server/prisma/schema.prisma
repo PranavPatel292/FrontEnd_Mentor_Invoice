@@ -25,7 +25,7 @@ model Invoices {
   invoiceDate           DateTime
   paymentTerms          PaymentTerms
   projectDescription    String
-  status                Staus
+  status                Status
   item                  Items[]
 }
 
@@ -45,7 +45,7 @@ enum PaymentTerms {
   INMONTH
 }
 
-enum Staus {
+enum Status {
   DRAFT
   SAVE
 }

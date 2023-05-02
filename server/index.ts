@@ -9,3 +9,7 @@ const port = 3000;
 
 app.use(bodyParser.json());
 app.use("/api/v1", require("./routes/Get/get"));
+app.use("/api/v1", require("./routes/Post/post"));
+app.use("/api/v1", require("./routes/Delete/delete"));
+
+app.listen(port, () => console.log("Server listening on port " + port));

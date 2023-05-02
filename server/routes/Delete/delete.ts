@@ -3,5 +3,5 @@ import { validateInvoiceId } from "../../middleware/checkId";
 
 const router = require("express").Router();
 
-router.delete("/deleteInvoices", validateInvoiceId, deleteInvoice);
+router.delete("/deleteInvoice", validateInvoiceId, deleteInvoice);
 module.exports = router;

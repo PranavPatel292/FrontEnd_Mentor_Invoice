@@ -13,10 +13,10 @@ export const validateInvoiceId = async (
   next: NextFunction
 ) => {
   try {
-    const invoiceId = req.query["id"] as string;
+    const { invoiceId } = req.query;
 
     try {
-      await schema.validate(invoiceId);
+      await schema.validate({ invoiceId });
     } catch (error) {
       // bad request
       res.status(400).send("Invoice id required");
@@ -25,13 +25,14 @@ export const validateInvoiceId = async (
 
     const result = await prisma.invoices.findFirst({
       where: {
-        id: invoiceId,
+        id: invoiceId as string,
       },
     });
 
     if (!result) {
       // not found error
       res.status(404).send("Invoice id not found");
+      return;
     }
 
     next();
