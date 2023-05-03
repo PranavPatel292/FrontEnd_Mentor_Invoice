@@ -1,8 +1,15 @@
 import express from "express";
 const bodyParser = require("body-parser");
 
+const cors = require("cors");
+
+const allowedOrigins = ["http://localhost:3000"];
+
 const app = express();
 const port = 3000;
+
+// TODO: - add localhost:3000 the only allowed origins
+app.use(cors());
 
 // localhost:3000/api/getAllInvoice
 // localhost:3000/api/getInvoice
