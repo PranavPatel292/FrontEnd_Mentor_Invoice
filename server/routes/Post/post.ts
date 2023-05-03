@@ -1,7 +1,8 @@
-import { createInvoice } from "../../controllers/postController";
+import { draftInvoice, saveInvoice } from "../../controllers/postController";
 
 const router = require("express").Router();
 
-router.post("/createInvoice", createInvoice);
+router.post("/saveInvoice", saveInvoice);
+router.post("/draftInvoice", draftInvoice);
 
 module.exports = router;

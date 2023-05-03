@@ -47,5 +47,6 @@ enum PaymentTerms {
 
 enum Status {
   DRAFT
-  SAVE
+  PAID
+  PENDING
 }

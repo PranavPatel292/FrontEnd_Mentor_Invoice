@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { prisma } from "../prisma/prismaClient";
 
 // TODO: use validation before creating a new invoice
-export const createInvoice = async (req: Request, res: Response) => {
+const createInvoice = async (data: any) => {
   try {
     const {
       billFromStreetAddress,
@@ -20,7 +20,7 @@ export const createInvoice = async (req: Request, res: Response) => {
       projectDescription,
       status,
       items,
-    } = req.body;
+    } = data;
 
     prisma.$transaction(async () => {
       const invoice = await prisma.invoices.create({
@@ -43,8 +43,7 @@ export const createInvoice = async (req: Request, res: Response) => {
       });
 
       if (!invoice) {
-        res.status(500).send("Something went wrong");
-        return;
+        return false;
       }
 
       for (const item of items) {
@@ -59,8 +58,30 @@ export const createInvoice = async (req: Request, res: Response) => {
       }
     });
 
-    res.status(200).send("Created a new invoice");
+    return true;
   } catch (error) {
+    return false;
+  }
+};
+
+export const saveInvoice = async (req: Request, res: Response) => {
+  const data = { ...req.body, status: "PENDING" };
+
+  const isInvoiceSaved = createInvoice(data);
+
+  if (!isInvoiceSaved) {
     res.status(500).send("Something went wrong");
   }
+  res.status(200).send("Invoice saved");
+};
+
+export const draftInvoice = async (req: Request, res: Response) => {
+  const data = { ...req.body, status: "DRAFT" };
+
+  const isInvoiceSaved = createInvoice(data);
+
+  if (!isInvoiceSaved) {
+    res.status(500).send("Something went wrong");
+  }
+  res.status(200).send("Invoice saved");
 };
