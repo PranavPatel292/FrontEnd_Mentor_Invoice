@@ -1,13 +1,22 @@
 import * as dayjs from "dayjs";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { StringParam, useQueryParam } from "use-query-params";
 import { getAllInvoices } from "../../requests/invoices_requests";
 import { ReactComponent as RightArrow } from "../assets/icon-arrow-right.svg";
 import { NoInvoiceMessage } from "./NoInvoiceMessage";
 
 export const InvoiceItem = () => {
   const { data, isLoading } = useQuery(["allInvoices"], getAllInvoices);
+  const [_, setInvoiceId] = useQueryParam("invoiceId", StringParam);
 
   let statusBox = "";
+  const navigation = useNavigate();
+
+  const handleOnClick = (id: string) => {
+    setInvoiceId(id);
+    navigation(`/viewInvoice?invoiceId=${id}`);
+  };
 
   return (
     <>
@@ -25,11 +34,9 @@ export const InvoiceItem = () => {
                   statusBox = "badge-warning";
                   break;
               }
-              console.log(item.status);
-              console.log(statusBox);
               return (
-                <div key={index}>
-                  <div className="hidden md:block w-full hover:cursor-pointer ">
+                <div key={index} onClick={() => handleOnClick(item.id)}>
+                  <div className="hidden md:block w-full hover:cursor-pointer">
                     <div className="p-5 md:flex md:flex-row md:justify-between md:items-center md:shadow-lg bg-primary/5 rounded-lg">
                       <p className="max-w-[20%] truncate">{item.id}</p>
                       <p className="">

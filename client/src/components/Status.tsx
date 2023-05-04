@@ -1,15 +1,15 @@
 interface StatusProps {
-  value: "paid" | "pending" | "draft";
+  value: string;
 }
 
 export const Status = ({ value }: StatusProps) => {
   let statusBox = "";
 
   switch (value) {
-    case "paid":
+    case "PAID":
       statusBox = "badge-success";
       break;
-    case "pending":
+    case "PENDING":
       statusBox = "badge-warning";
       break;
   }
