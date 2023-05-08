@@ -9,7 +9,7 @@ import { VIMediumAndLarge } from "./VIMediumAndLarge";
 import { VISmall } from "./VISmall";
 
 export const ViewInvoice = () => {
-  const [invoiceId, _] = useQueryParam("invoiceId", StringParam);
+  const [invoiceId, setInvoiceId] = useQueryParam("invoiceId", StringParam);
 
   const navigate = useNavigate();
 
@@ -23,11 +23,14 @@ export const ViewInvoice = () => {
 
   return (
     <>
-      {!isLoading && (
+      {!isLoading && data && (
         <>
           <div
             className="mt-10 md:mt-10 lg:-mt-5 px-5 flex flex-row space-x-3 items-center hover:cursor-pointer hover:underline"
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              setInvoiceId(undefined);
+              navigate("/");
+            }}
           >
             <LeftArrow />
             <h1>Go back</h1>
