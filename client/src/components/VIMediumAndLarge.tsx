@@ -3,8 +3,9 @@ import { VIButtons } from "./VIButtons";
 
 interface VIMediumAndLargeProps {
   status: string;
+  id: string;
 }
-export const VIMediumAndLarge = ({ status }: VIMediumAndLargeProps) => {
+export const VIMediumAndLarge = ({ status, id }: VIMediumAndLargeProps) => {
   return (
     <>
       <div className="flex flex-col space-y-10">
@@ -14,7 +15,7 @@ export const VIMediumAndLarge = ({ status }: VIMediumAndLargeProps) => {
             <Status value={status} />
           </div>
           <div className="flex flex-row space-x-5 items-center">
-            <VIButtons />
+            <VIButtons id={id} status={status} />
           </div>
         </div>
       </div>

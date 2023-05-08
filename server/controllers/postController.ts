@@ -85,3 +85,27 @@ export const draftInvoice = async (req: Request, res: Response) => {
   }
   res.status(200).send("Invoice saved");
 };
+
+export const paidInvoice = async (req: Request, res: Response) => {
+  try {
+    const { invoiceId } = req.query;
+
+    const result = await prisma.invoices.update({
+      where: {
+        id: invoiceId as string,
+      },
+      data: {
+        status: "PAID",
+      },
+      include: {
+        item: true,
+      },
+    });
+
+    res
+      .status(200)
+      .send({ message: "Invoice paid successfully", data: result });
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+};
