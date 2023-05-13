@@ -22,3 +22,9 @@ export const makeInvoicePaid = () => {
     });
   });
 };
+
+export const deleteInvoice = () => {
+  return useMutation((id: any) => {
+    return api.delete("/deleteInvoice", { params: { invoiceId: id } });
+  });
+};
