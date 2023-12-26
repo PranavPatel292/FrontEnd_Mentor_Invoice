@@ -11,24 +11,23 @@ export const BillFrom = ({ register, errors }: BillFromProps) => {
         <div className="flex w-full flex-col ">
           <label className="text-sm">Street Address</label>
           <input
-            {...register("bill_from_streetAddress")}
+            {...register("billFromStreetAddress")}
             className="rounded w-[100%] p-2"
           />
-          <p className="text-sm">{errors.bill_from_streetAddress?.message}</p>
         </div>
         <div className="flex flex-col md:flex-row md:justify-between md:space-x-5">
           <div className="flex flex-row w-full space-x-5 md:w-2/3 ">
             <div className="flex flex-col w-full ">
               <label className="text-sm">City</label>
               <input
-                {...register("bill_from_city")}
+                {...register("billFromCity")}
                 className="rounded w-[100%] p-2"
               />
             </div>
             <div className="flex flex-col w-full ">
               <label className="text-sm">Postcode</label>
               <input
-                {...register("bill_from_postCode")}
+                {...register("billFromPostcode")}
                 className="rounded w-[100%] p-2"
               />
             </div>
@@ -37,7 +36,7 @@ export const BillFrom = ({ register, errors }: BillFromProps) => {
           <div className="flex flex-col w-full md:w-1/3">
             <label className="text-sm">Country</label>
             <input
-              {...register("bill_from_country")}
+              {...register("billFromCountry")}
               className="rounded w-[100%] p-2"
             />
           </div>

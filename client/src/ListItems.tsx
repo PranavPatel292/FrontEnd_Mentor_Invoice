@@ -32,23 +32,28 @@ export const ListItems = ({
                 <tr key={index} className="">
                   <td className="pr-2">
                     <input
-                      {...register(`item_list.${index}.item_name`)}
+                      {...register(`items.${index}.item_name`)}
                       className=" md:w-[180px] p-2 rounded"
                     />
                   </td>
                   <td className="pr-2">
                     <input
-                      {...register(`item_list.${index}.quantity`)}
+                      {...register(`items.${index}.quantity`)}
                       className="w-[90px] p-2 rounded"
                     />
                   </td>
                   <td className="pr-2">
                     <input
-                      {...register(`item_list.${index}.price`)}
+                      {...register(`items.${index}.price`)}
                       className="w-[90px] p-2 rounded"
                     />
                   </td>
-                  <td className="pr-8">{`0$`}</td>
+                  <td className="pr-8">
+                    {new Intl.NumberFormat("en-AU", {
+                      style: "currency",
+                      currency: "AUD",
+                    }).format(data[index].quantity * data[index].price)}
+                  </td>
                   <td>
                     <BsFillTrashFill onClick={() => remove(index)} />
                   </td>
@@ -62,11 +67,11 @@ export const ListItems = ({
       <div className="md:hidden flex flex-col space-y-10">
         {data.map((_: any, index: number) => {
           return (
-            <div className="flex flex-col space-y-5 ">
+            <div className="flex flex-col space-y-5 " key={index}>
               <div className="w-full flex flex-col">
                 <label>Item name</label>
                 <input
-                  {...register(`item_list.${index}.item_name`)}
+                  {...register(`items.${index}.item_name`)}
                   className="  p-2 rounded"
                 />
               </div>
@@ -76,7 +81,7 @@ export const ListItems = ({
                   <label>Qty.</label>
                   <input
                     type="number"
-                    {...register(`item_list.${index}.quantity`)}
+                    {...register(`items.${index}.quantity`)}
                     className="w-full p-2 rounded"
                   />
                 </div>
@@ -85,14 +90,19 @@ export const ListItems = ({
                   <label>Price</label>
                   <input
                     type="number"
-                    {...register(`item_list.${index}.price`)}
+                    {...register(`items.${index}.price`)}
                     className="w-[90px] p-2 rounded"
                   />
                 </div>
 
                 <div className="flex flex-col justify-center items-center">
                   <label>Total</label>
-                  <p>{`0$`}</p>
+                  <p>
+                    {new Intl.NumberFormat("en-AU", {
+                      style: "currency",
+                      currency: "AUD",
+                    }).format(data[index].quantity * data[index].price)}
+                  </p>
                 </div>
 
                 <div className="flex flex-col mt-5 justify-center items-center">

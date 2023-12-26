@@ -1,34 +1,33 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
+import { MouseEventHandler, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { BillFrom } from "./BillFrom";
 import { BillTo } from "./BillTo";
 import { ListItems } from "./ListItems";
 
-// TODO: define validation for item_list.
-// TODO: how to differentiate between draft and save buttons.
 // TODO: make sure to do dirty submit when doing update.
-const item_list_schema = yup.object({
-  item_name: yup.string().optional(),
-  quality: yup.string().optional(),
+
+const items_schema = yup.object({
+  name: yup.string().optional(),
+  quantity: yup.string().optional(),
   price: yup.string().optional(),
 });
 
 const formSchema = yup.object({
-  bill_from_streetAddress: yup.string().required(),
-  bill_from_city: yup.string().required(),
-  bill_from_postCode: yup.string().required(),
-  bill_from_country: yup.string().required(),
-  bill_to_clientName: yup.string().required(),
-  bill_to_clientEmail: yup.string().required(),
-  bill_to_streetAddress: yup.string().required(),
-  bill_to_city: yup.string().required(),
-  bill_to_postCode: yup.string().required(),
-  bill_to_country: yup.string().required(),
-  issueDate: yup.string().required(),
-  //paymentTerms: yup.string().required(),
-  item_list: yup.array(item_list_schema).optional(),
+  billFromStreetAddress: yup.string().required(),
+  billFromCity: yup.string().required(),
+  billFromPostCode: yup.string().required(),
+  billFromCountry: yup.string().required(),
+  billToClientName: yup.string().required(),
+  billToClientEmail: yup.string().required(),
+  billToStreetAddress: yup.string().required(),
+  billToCity: yup.string().required(),
+  billToPostCode: yup.string().required(),
+  billToCountry: yup.string().required(),
+  invoiceDate: yup.string().required(),
+  paymentTerms: yup.string().required(),
+  items: yup.array(items_schema).optional(),
   projectDescription: yup.string().required(),
 });
 
@@ -36,19 +35,19 @@ type FormData = yup.InferType<typeof formSchema>;
 
 export const CreateAndEditInvoice = () => {
   const defaultValues = {
-    bill_from_streetAddress: "",
-    bill_from_city: "",
-    bill_from_postCode: "",
-    bill_from_country: "",
-    bill_to_clientName: "",
-    bill_to_clientEmail: "",
-    bill_to_streetAddress: "",
-    bill_to_city: "",
-    bill_to_postCode: "",
-    bill_to_country: "",
-    issueDate: "",
+    billFromStreetAddress: "",
+    billFromCity: "",
+    billFromPostCode: "",
+    billFromCountry: "",
+    billToClientName: "",
+    billToClientEmail: "",
+    billToStreetAddress: "",
+    billToCity: "",
+    billToPostCode: "",
+    billToCountry: "",
+    invoiceDate: "",
     paymentTerms: "",
-    item_list: [],
+    items: [],
     projectDescription: "",
   };
 
@@ -68,16 +67,19 @@ export const CreateAndEditInvoice = () => {
 
   const { fields, remove, append } = useFieldArray({
     control,
-    name: "item_list",
+    name: "items",
   });
 
-  const onSubmit = (
-    data: FormData,
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    console.log(data);
-    const btnType = event.currentTarget.name;
-    console.log(btnType);
+  const handleDraft: MouseEventHandler<HTMLButtonElement> = () => {
+    // handle Draft button click
+    const data = { ...watch() };
+    console.log(data, "Hello Draft");
+  };
+
+  const handleSaveSend: MouseEventHandler<HTMLButtonElement> = () => {
+    // handle Save & Send button click
+    const data = { ...watch() };
+    console.log(data, "Hello Save");
   };
 
   useEffect(() => {
@@ -86,7 +88,7 @@ export const CreateAndEditInvoice = () => {
     }
   }, [formState, reset]);
 
-  const watchFieldArray = watch("item_list");
+  const watchFieldArray = watch("items");
   const controlledFields = fields.map((field, index) => {
     return {
       ...field,
@@ -98,10 +100,7 @@ export const CreateAndEditInvoice = () => {
   // TODO: width of the modal
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col space-y-5 rounded-md m-5 p-7 modal-box"
-      >
+      <form className="flex flex-col space-y-5 rounded-md m-5 p-7 modal-box">
         <div className="overflow-y-scroll flex flex-col space-y-5">
           <BillFrom register={register} errors={errors} />
 
@@ -126,18 +125,22 @@ export const CreateAndEditInvoice = () => {
               Discard
             </label>
           </div>
-          <input
-            name="draft"
-            type="submit"
+          <button
+            type="button"
+            onClick={handleDraft}
             value="Save as Draft"
             className="btn btn-xs sm:btn-sm md:btn-md  btn-secondary opacity-80"
-          />
-          <input
-            name="save"
-            type="submit"
+          >
+            Save As Draft
+          </button>
+          <button
+            type="button"
+            onClick={handleSaveSend}
             value="Save & Send"
             className="btn btn-xs sm:btn-sm md:btn-md  btn-success"
-          />
+          >
+            Save & Send
+          </button>
         </div>
       </form>
     </>
